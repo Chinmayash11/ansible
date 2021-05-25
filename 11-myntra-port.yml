@@ -1,0 +1,52 @@
+---
+- name: Update web servers
+  hosts: centos
+  become: yes
+
+  handlers:
+  - name: update app
+    git:
+      repo: https://github.com/Chinmayash11/ecomm.git
+      dest: /var/www/html
+
+  - name: Restarted HTTPD
+    service:
+      name: httpd
+      state: restarted
+ 
+  - name: Ensure httpd is started
+    service:
+      name: httpd
+      state: started
+
+  tasks:
+  - name: Enable SELinux
+    selinux:
+      policy: targeted
+      state: permissive
+
+  - name: Ensure git is installed
+    package:
+      name: git
+      state: present
+
+  - name: Ensure httpd is installed
+    package:
+      name: httpd
+      state: present
+    notify:
+    -  update app
+    -  Ensure httpd is started
+ 
+  - name: Ensure httpd is enabled
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: modify port
+    copy:
+      src: httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+    notify:
+    -  Restarted HTTPD
+...

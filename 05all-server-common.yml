@@ -1,0 +1,15 @@
+---
+- name: Update web servers
+  hosts: all
+
+  tasks:
+  - name: Ensure common directory created
+    file:
+      path: /home/centos/common_dir
+      state: directory
+
+  - name: Ensure common file created
+    copy:
+      dest: /home/centos/common_dir/imp.txt
+      content: This is important.
+...

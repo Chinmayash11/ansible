@@ -1,0 +1,42 @@
+---
+- name: Update web servers
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Ensure httpd is installed
+    package:
+      name: httpd
+      state: present
+    when: ansible_os_family == "Redhat"
+
+  - name: Ensure httpd is started
+    service:
+      name: httpd
+      state: started
+    when: ansible_os_family == "Redhat"
+
+  - name: Ensure httpd is enabled
+    service:
+      name: httpd
+      enabled: yes
+    when: ansible_os_family == "Redhat"
+
+  - name: Ensure apache2 is installed
+    package:
+      name: apache2
+      state: present
+    when: ansible_os_family == "debian"
+
+  - name: Ensure apache2 is started
+    service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "debian"
+
+  - name: Ensure apache2 is enabled
+    service:
+      name: apache2
+      enabled: yes
+    when: ansible_os_family == "debian"
+...

@@ -1,0 +1,16 @@
+---
+- name: Update web servers
+  hosts: ubuntu
+  become: yes
+
+  tasks:
+  - name: Ensure default page in removed
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
+  - name: Ensure ecomm site deployed
+    git:
+      repo: https://github.com/Chinmayash11/ecomm.git
+      dest: /var/www/html
+...

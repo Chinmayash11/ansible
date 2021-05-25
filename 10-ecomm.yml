@@ -1,0 +1,35 @@
+---
+- name: Update web servers
+  hosts: ubuntu
+  become: yes
+
+  tasks:
+  - name: Ensure apache2 is installed
+    package:
+      name: apache2
+      state: present
+    notify:
+    - remove index
+    - Ensure site
+
+  - name: Ensure apache2 is started
+    service:
+      name: apache2
+      state: started
+
+  - name: Ensure apache2 is enabled
+    service:
+      name: apache2
+      enabled: yes
+
+  handlers:
+  - name: remove index
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
+  - name: Ensure site
+    git:
+      repo: https://github.com/Chinmayash11/ecomm.git
+      dest: /var/www/html
+...

@@ -1,0 +1,13 @@
+---
+- name: Update web servers
+  hosts: all
+  become: yes
+  vars:
+     user_name: Chinmaya prasad sahoo
+
+  tasks:
+  - name: dynamic website
+    template:
+      src: dynamic.j2
+      dest: /var/www/html/dynamic.html
+...

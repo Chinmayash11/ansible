@@ -1,0 +1,29 @@
+---
+- name: Update web servers
+  hosts: web
+
+  tasks:
+  - name: Ensure web directory created
+    file:
+      path: /home/centos/web_docs
+      state: directory
+
+  - name: Ensure web directory created
+    copy:
+      dest: /home/centos/web_docs/index.html
+      content: Here all html file present
+  
+- name: Update app servers
+  hosts: app
+
+  tasks:
+  - name: Ensure app directory created
+    file:
+      path: /home/centos/app_docs
+      state: directory
+
+  - name: Ensure app directory created
+    copy:
+      dest: /home/centos/app_docs/pome.html
+      content: here all app documents present
+...

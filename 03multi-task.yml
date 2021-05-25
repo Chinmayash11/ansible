@@ -1,0 +1,19 @@
+---
+- name: Update web servers
+  hosts: web
+
+  tasks:
+  - name: Ensure web directory created
+    file:
+      path: /home/centos/web_fol
+      state: directory
+  
+- name: Update app servers
+  hosts: app
+
+  tasks:
+  - name: Ensure app directory created
+    file:
+      path: /home/centos/web_app
+      state: directory
+...

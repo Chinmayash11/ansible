@@ -1,0 +1,10 @@
+---
+- name: Update web servers
+  hosts: web
+
+  tasks:
+  - name: Ensure web directory created
+    file:
+      path: /home/centos/baba
+      state: directory
+...
