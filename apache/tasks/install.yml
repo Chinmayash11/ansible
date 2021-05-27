@@ -1,0 +1,19 @@
+---
+  - name: Ensure git is installed
+    package:
+      name: git
+      state: present
+
+  - name: Ensure httpd is installed
+    package:
+      name: httpd
+      state: present
+    notify:
+    -  update app
+    -  Ensure httpd is started
+ 
+  - name: Ensure PHP is installed
+    package:
+      name: php
+      state: present
+...

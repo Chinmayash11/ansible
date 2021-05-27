@@ -1,0 +1,17 @@
+---
+  - name: update app
+    git:
+      repo: https://github.com/Chinmayash11/ecomm.git
+      dest: /var/www/html
+
+  - name: Restarted HTTPD
+    service:
+      name: httpd
+      state: restarted
+ 
+  - name: Ensure httpd is started
+    service:
+      name: httpd
+      state: started
+
+...

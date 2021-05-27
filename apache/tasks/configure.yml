@@ -1,0 +1,25 @@
+---
+
+  - name: Enable SELinux
+    selinux:
+      policy: targeted
+      state: permissive
+
+  - name: Ensure httpd is enabled
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: modify port
+    template:
+      src: httpd.j2
+      dest: /etc/httpd/conf/httpd.conf
+    notify:
+    -  Restarted HTTPD
+
+  - name: Update PHP app
+    copy:
+      src: date.php
+      dest: /var/www/html/date.php
+
+...
